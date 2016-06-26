@@ -3,11 +3,20 @@ from Tkinter import *
 import os
 import tkMessageBox
 
+
 def start(event):
-    put_dir=ent.get()
-    print ("downloading... step 1, project:",put_dir)
-    global put_dir
-    
+    put_prjn=ent.get()
+    print ("downloading... step 1, project:",put_prjn)
+    global put_prjn
+    lab.destroy()
+    ent.destroy()
+    but.destroy()
+    lab2.pack()
+    #    root.destroy()
+
+ 
+
+     
 root = Tk()
 
 but = Button(root,
@@ -22,6 +31,11 @@ lab = Label(root, text="Название проекта",
             bd=10,
             font="Arial 14")
 
+lab2 = Label(root, text="Downloading... waiting",
+            width=35,
+            bd=10,
+            font="Arial 14")
+
 but.bind("<Button-1>", start)
 
 # visibility of button
@@ -32,3 +46,4 @@ but.pack()
 
 # visibility of window
 root.mainloop()
+
