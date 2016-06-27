@@ -12,7 +12,7 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'"+put_prjn+" ./"+put_prjn+"/")
+    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'build3.4 ./"+put_prjn+"/")
     print "!!!",exit_code
     if exit_code == 0:
         print "Ok Download complete!"
@@ -22,7 +22,17 @@ def start(event):
         print exit_code,"Ahtung!! ERROR"
         lab2.destroy()
         down_ahtung.pack()
-        
+    exit_code2 = os.system("scp -pr "+hostname+":'/home/yanki/test/'"+put_prjn+"/* ./"+put_prjn+"/")
+    print "!!!",exit_code2
+    if exit_code2 == 0:
+        print "Ok Download complete!"
+        lab2.destroy()
+        down_ok.pack()
+    else:
+        print exit_code2,"Ahtung!! ERROR"
+        lab2.destroy()
+        down_ahtung.pack()
+
 # директория проекта _создается_ при скачивании scp
 # поэтому ее не должно быть перед запуском скрипта, проверку потом сделаю
 # -p сохраняет время модификации и по возможности права доступа
