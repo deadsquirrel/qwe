@@ -13,10 +13,15 @@ def start(event):
     but.destroy()
     lab2.pack()
     exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'"+put_prjn+" ./"+put_prjn+"/")
+    print "!!!",exit_code
     if exit_code == 0:
         print "Ok Download complete!"
+        lab2.destroy()
+        down_ok.pack()
     else:
-        print "Ahtung!! ERROR"
+        print exit_code,"Ahtung!! ERROR"
+        lab2.destroy()
+        down_ahtung.pack()
         
 # директория проекта _создается_ при скачивании scp
 # поэтому ее не должно быть перед запуском скрипта, проверку потом сделаю
@@ -44,6 +49,17 @@ lab2 = Label(root, text="Downloading... waiting",
             width=35,
             bd=10,
             font="Arial 14")
+
+down_ok = Label(root, text="Ok Download complete!",
+            width=35,
+            bd=10,
+            font="Arial 14")
+
+down_ahtung = Label(root, text="Ahtung!! ERROR",
+            width=35,
+            bd=10,
+            font="Arial 14")
+
 
 but.bind("<Button-1>", start)
 
