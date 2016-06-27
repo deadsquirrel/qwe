@@ -12,13 +12,14 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/project' ./put_dir/")
+    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'"+put_prjn+" ./"+put_prjn+"/")
     if exit_code == 0:
         print "Ok Download complete!"
     else:
         print "Ahtung!! ERROR"
         
-# директория проекта создается при скачивании scp
+# директория проекта _создается_ при скачивании scp
+# поэтому ее не должно быть перед запуском скрипта, проверку потом сделаю
 # -p сохраняет время модификации и по возможности права доступа
 # os.system(command) - исполняет системную команду, возвращает
 # код её завершения (в случае успеха 0).
