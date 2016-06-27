@@ -12,11 +12,19 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    #    root.destroy()
+    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/project' ./put_dir/")
+    if exit_code == 0:
+        print "Ok Download complete!"
+    else:
+        print "Ahtung!! ERROR"
+        
+# директория проекта создается при скачивании scp
+# -p сохраняет время модификации и по возможности права доступа
+# os.system(command) - исполняет системную команду, возвращает
+# код её завершения (в случае успеха 0).
 
- 
+hostname ="yanki@192.168.0.137"
 
-     
 root = Tk()
 
 but = Button(root,
