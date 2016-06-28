@@ -12,7 +12,7 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'build3.4 ./"+put_prjn+"/")
+    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'build3.4/1/*  /home/yanki/test/'build3.4/2/* /home/yanki/test/'build3.4/5/* ./"+put_prjn+"/")
     print "!!!",exit_code
     if exit_code == 0:
         print "Ok Download complete!"
