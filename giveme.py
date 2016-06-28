@@ -12,7 +12,9 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    exit_code = os.system("scp -pr "+hostname+":'/home/yanki/test/'build3.4 ./"+put_prjn+"/")
+    exit_code = os.system("scp -pr "+hostname+":'/var/www/'build3.4.horoshop.com.ua ./"+put_prjn+".com.ua/")
+    print "!!!",exit_code
+
     print "!!!",exit_code
     if exit_code == 0:
         print "Ok Download complete!"
@@ -22,7 +24,7 @@ def start(event):
         print exit_code,"Ahtung!! ERROR"
         lab2.destroy()
         down_ahtung.pack()
-    exit_code2 = os.system("scp -pr "+hostname+":'/home/yanki/test/'"+put_prjn+"/* ./"+put_prjn+"/")
+    exit_code2 = os.system("scp -pr "+hostname+":'/var/www/'"+put_prjn+".horoshop.com.ua/* ./"+put_prjn+".com.ua/")
     print "!!!",exit_code2
     if exit_code2 == 0:
         print "Ok Download complete!"
@@ -39,7 +41,9 @@ def start(event):
 # os.system(command) - исполняет системную команду, возвращает
 # код её завершения (в случае успеха 0).
 
-hostname ="yanki@192.168.0.137"
+#hostname ="yanki@192.168.0.137"
+hostname ="horoshop@89.184.65.107"
+#43y7510bjLV6t3L-1
 
 root = Tk()
 
