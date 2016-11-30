@@ -12,9 +12,23 @@ def start(event):
     ent.destroy()
     but.destroy()
     lab2.pack()
-    exit_code = os.system("scp -pr "+hostname+":'/var/www/'build3.4.horoshop.com.ua ./"+put_prjn+".com.ua/")
-    print "!!!",exit_code
-    if exit_code == 0:
+
+    exit_code10 = os.system ("mkdir "+put_prjn+"")
+
+    
+    exit_code1 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/frontend ./"+put_prjn+"/frontend/")
+    print "!!!1",exit_code1
+    exit_code2 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/out ./"+put_prjn+"/out/")
+    print "!!!2",exit_code2
+    exit_code3 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/core ./"+put_prjn+"/core/")
+    print "!!!3",exit_code3
+    exit_code4 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/edit ./"+put_prjn+"/edit/")
+    print "!!!4",exit_code4
+    exit_code5 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/config ./"+put_prjn+"/config/")
+    print "!!!5",exit_code5
+    exit_code6 = os.system("scp -pr "+hostname+":'/var/www/'build.horoshop.com.ua/requirements ./"+put_prjn+"/requirements/")
+    print "!!!6",exit_code6
+    if exit_code6 == 0:
         print "Ok Download complete!"
         lab2.destroy()
         down_ok.pack()
@@ -22,14 +36,18 @@ def start(event):
         print exit_code,"Ahtung!! ERROR"
         lab2.destroy()
         down_ahtung.pack()
-    exit_code2 = os.system("scp -pr "+hostname+":'/var/www/'"+put_prjn+".horoshop.com.ua/* ./"+put_prjn+".com.ua/")
-    print "!!!",exit_code2
-    if exit_code2 == 0:
+
+    
+    
+    # не копирует скрытые дир и файлы
+    exit_code7 = os.system("scp -pr "+hostname+":'/var/www/'"+put_prjn+".horoshop.com.ua/* ./"+put_prjn+"/")
+    print "!!!7!!",exit_code7
+    if exit_code7 == 0:
         print "Ok Download complete!"
         lab2.destroy()
         down_ok.pack()
     else:
-        print exit_code2,"Ahtung!! ERROR"
+        print exit_code7,"Ahtung!! ERROR"
         lab2.destroy()
         down_ahtung.pack()
 
@@ -38,9 +56,10 @@ def start(event):
 # -p сохраняет время модификации и по возможности права доступа
 # os.system(command) - исполняет системную команду, возвращает
 # код её завершения (в случае успеха 0).
-# check -1 
-# hostname ="yanki@192.168.0.137"
-hostname ="horoshop@89.184.65.107"
+
+#hostname ="yanki@192.168.0.137"
+hostname ="cent"
+#43y7510bjLV6t3L-1
 
 root = Tk()
 
@@ -82,4 +101,3 @@ but.pack()
 
 # visibility of window
 root.mainloop()
-
