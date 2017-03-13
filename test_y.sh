@@ -20,31 +20,34 @@ if ! [ $? -ne 0 ]; then
 fi
 
 #проверяем наличие репозитория
-if ! [ -f "/home/horoshop/repos/${PROJECT_NAME}.git" ]; then 
+if ! [ -d /home/horoshop/repos/${PROJECT_NAME}.git ]; then 
 	echo 'repos not found'
 	exit 1
 fi
 
 #содаетм пользователя и добавляем его в группы
-useradd  u_${PROJECT_NAME} -G git,www-data -d /home/projects/${PROJECT_NAME} -m -s /bin/bash
+useradd  u_${PROJECT_NAME} -G git,www-data  -d /home/projects/${PROJECT_NAME} -m -s /bin/bash
 
 #создает директорию для бекапа БД
-mkdir "/home/projects/${PROJECT_NAME}/db_backup"
+mkdir /home/projects/${PROJECT_NAME}/db_backup
 
 #почему мы меняем права тут сейчас?
-chown "git:www-data -R /home/horoshop/repos/${PROJECT_NAME}.git"
+chown git:www-data -R /home/horoshop/repos/${PROJECT_NAME}.git
 
 #содаем симлинки
 
-ln -s /var/www/${PROJECT_NAME}.horoshop.com.ua/content/ /home/projects/${PROJECT_NAME}/content/
-ln -s /home/horoshop/repos/${PROJECT_NAME}.git /home/project/${PROJECT_NAME}/repository.git
+ln -s /home/projects/${PROJECT_NAME}/content/ /var/www/${PROJECT_NAME}.horoshop.com.ua/content/
+ln -s /home/project/${PROJECT_NAME}/repository.git /home/horoshop/repos/${PROJECT_NAME}.git
 
 #делаем дамп БД
 mysqldump --user=root --password=nCzALHXOa2 $SUB_DOMAIN_NAME > /home/projects/${PROJECT_NAME}/db_backup/last.sql
 
 
 #чиним репозиторий
-sh /var/www/ds.horoshop.com.ua/shell_scripts/project/fix-git.sh /var/www/${PROJECT_NAME}.horoshop.com.ua ${PROJECT_NAME}
+/var/www/ds.horoshop.com.ua/shell_scripts/project/fix-git.sh /var/www/${PROJECT_NAME}.horoshop.com.ua /home/projects/${PROJECT_NAME}
 
 #меняем права доступа на директорию
-chown  u_${PROJECT_NAME}:u_${PROJECT_NAME}  /home/projects/${PROJECT_NAME}
+chmod 0775  /home/projects/${PROJECT_NAME}
+chown  u_${PROJECT_NAME}:u_${PROJECT_NAME}   /home/projects/${PROJECT_NAME}
+
+echo "Complete!"
