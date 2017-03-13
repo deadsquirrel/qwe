@@ -26,7 +26,7 @@ if ! [ -d /home/horoshop/repos/${PROJECT_NAME}.git ]; then
 fi
 
 #содаетм пользователя и добавляем его в группы
-useradd  u_${PROJECT_NAME} -G git,www-data  -d /home/projects/${PROJECT_NAME} -m -s /bin/bash
+useradd  u_${PROJECT_NAME} -G ssh_users,www-data  -d /home/projects/${PROJECT_NAME} -m -s /bin/bash
 
 #создает директорию для бекапа БД
 mkdir /home/projects/${PROJECT_NAME}/db_backup
@@ -35,9 +35,8 @@ mkdir /home/projects/${PROJECT_NAME}/db_backup
 chown git:www-data -R /home/horoshop/repos/${PROJECT_NAME}.git
 
 #содаем симлинки
-
-ln -s /home/projects/${PROJECT_NAME}/content/ /var/www/${PROJECT_NAME}.horoshop.com.ua/content/
-ln -s /home/project/${PROJECT_NAME}/repository.git /home/horoshop/repos/${PROJECT_NAME}.git
+ln -s  /var/www/${PROJECT_NAME}.horoshop.com.ua/content/ /home/projects/${PROJECT_NAME}/content
+ln -s /home/horoshop/repos/${PROJECT_NAME}/repository.git /home/projects/${PROJECT_NAME}.git
 
 #делаем дамп БД
 mysqldump --user=root --password=nCzALHXOa2 $SUB_DOMAIN_NAME > /home/projects/${PROJECT_NAME}/db_backup/last.sql
